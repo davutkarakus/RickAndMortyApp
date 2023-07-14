@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
 import com.davutkarakus.rickandmortyapp.model.Characters
 import com.davutkarakus.rickandmortyapp.model.Result
+import com.davutkarakus.rickandmortyapp.util.downloadFromUrl
+import com.davutkarakus.rickandmortyapp.util.placeholderProgressBar
 
 class RecyclerAdapter(var characterList:ArrayList<Result>) :  RecyclerView.Adapter<RecyclerAdapter.RvHolder>(){
     private lateinit var binding : RecyclerRowBinding
@@ -23,6 +25,7 @@ class RecyclerAdapter(var characterList:ArrayList<Result>) :  RecyclerView.Adapt
     override fun onBindViewHolder(holder: RvHolder, position: Int) {
         holder.view.nameText.text = characterList[position].name
         holder.view.statusText.text = characterList[position].status
+        holder.view.imageView.downloadFromUrl(characterList[position].image, placeholderProgressBar(holder.itemView.context))
     }
 
     override fun getItemCount(): Int {

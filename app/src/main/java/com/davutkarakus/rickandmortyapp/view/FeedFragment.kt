@@ -41,7 +41,6 @@ class FeedFragment : Fragment() {
     fun observeLiveData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
             characters?.let {
-
                 binding.characterList.visibility = View.VISIBLE
                 recyclerAdapter.updateCountryList(it.results!!)
                 binding.errorText.visibility = View.GONE
