@@ -28,4 +28,9 @@ class RecyclerAdapter(var characterList:ArrayList<Result>) :  RecyclerView.Adapt
     override fun getItemCount(): Int {
         return characterList.size
     }
+    fun updateCountryList(newCharacterList:List<Result>){
+        characterList.clear()
+        characterList.addAll(newCharacterList)
+        notifyDataSetChanged()
+    }
 }
