@@ -41,6 +41,7 @@ class FeedFragment : Fragment() {
     fun observeLiveData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
             characters?.let {
+
                 binding.characterList.visibility = View.VISIBLE
                 recyclerAdapter.updateCountryList(it.results!!)
                 binding.errorText.visibility = View.GONE
@@ -49,16 +50,26 @@ class FeedFragment : Fragment() {
         })
         viewModel.charactersLoading.observe(viewLifecycleOwner, Observer { loading ->
             loading?.let {
-                binding.progressBar.visibility = View.VISIBLE
-                binding.characterList.visibility = View.GONE
-                binding.errorText.visibility = View.GONE
+                if(it) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.characterList.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                }else {
+                    binding.progressBar.visibility = View.GONE
+                }
+
             }
         })
         viewModel.charactersError.observe(viewLifecycleOwner, Observer { error ->
             error?.let {
-                binding.errorText.visibility = View.VISIBLE
-                binding.characterList.visibility = View.GONE
-                binding.progressBar.visibility = View.GONE
+                if(it) {
+                    binding.errorText.visibility = View.VISIBLE
+                    binding.characterList.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                }else {
+                    binding.errorText.visibility = View.GONE
+                }
+
             }
 
         })

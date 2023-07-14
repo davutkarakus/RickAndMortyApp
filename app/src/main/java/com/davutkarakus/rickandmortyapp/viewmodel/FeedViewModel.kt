@@ -17,6 +17,7 @@ class FeedViewModel : ViewModel() {
     val characters = MutableLiveData<Characters>()
     val charactersError = MutableLiveData<Boolean>()
     val charactersLoading = MutableLiveData<Boolean>()
+
     fun refreshData() {
         getDataFromApi()
     }

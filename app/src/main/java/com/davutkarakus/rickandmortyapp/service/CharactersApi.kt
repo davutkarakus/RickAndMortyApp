@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface CharactersApi {
     // https://rickandmortyapi.com/api/character
 
-    @GET("https://rickandmortyapi.com/api/character")
+    @GET("api/character")
     fun getAllCharacters() : Single<Characters>
 }
