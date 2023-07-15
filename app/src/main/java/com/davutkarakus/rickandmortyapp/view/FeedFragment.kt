@@ -16,6 +16,7 @@ import com.davutkarakus.rickandmortyapp.viewmodel.FeedViewModel
 class FeedFragment : Fragment() {
     private lateinit var binding : FragmentFeedBinding
     private lateinit var viewModel : FeedViewModel
+
     private val recyclerAdapter = RecyclerAdapter(arrayListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

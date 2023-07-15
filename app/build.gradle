@@ -45,7 +45,7 @@ dependencies {
     def rxJavaVersion = '2.1.1'
     def roomVersion = '2.4.3'
     def navVersion = '2.5.1'
-    def preferencesVersion = '1.2.0'
+
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -75,5 +75,4 @@ dependencies {
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    implementation "androidx.preference:preference:$preferencesVersion"
 }
