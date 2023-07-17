@@ -2,9 +2,19 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="character"
+            type="com.davutkarakus.rickandmortyapp.model.Result" />
+        <variable
+            name="listener"
+            type="com.davutkarakus.rickandmortyapp.adapter.CharacterClickListener" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{listener::onCharacterClicked}"
         android:orientation="vertical"
         android:layout_margin="15dp"
         >
@@ -20,9 +30,9 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_gravity="center"
+                    android:downloadUrl="@{character.image}"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:src="@mipmap/ic_launcher_round"
                     android:scaleType="fitXY"
                     >
                 </ImageView>
@@ -37,7 +47,7 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:text="Rick Sanchez"
+                    android:text="@{character.name}"
                     >
                 </TextView>
                 <TextView
@@ -45,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
-                    android:text="Alive"
+                    android:text="@{character.species}"
                     android:layout_gravity="center"
                     android:textSize="14sp"
                     android:textStyle="normal"

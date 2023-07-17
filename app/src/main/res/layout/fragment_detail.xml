@@ -4,6 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="selectedChar"
+            type="com.davutkarakus.rickandmortyapp.model.Result" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,9 +34,10 @@
         <ImageView
             android:id="@+id/detailImageView"
             android:layout_width="200dp"
+            android:downloadUrl="@{selectedChar.image}"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            tools:src="@tools:sample/avatars" />
+             />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -32,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Rick Sanchez"
+        android:text="@{selectedChar.name}"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -58,7 +71,7 @@
             android:id="@+id/detailStatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status -> Alive"
+            android:text="@{`Status -> ` +selectedChar.status}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -88,7 +101,7 @@
             android:id="@+id/detailSpeciesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Species -> Human"
+            android:text="@{`Species -> ` +selectedChar.species}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -117,7 +130,7 @@
             android:id="@+id/detailGenderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gender -> Male"
+            android:text="@{`Gender -> ` +selectedChar.gender}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -148,7 +161,7 @@
             android:id="@+id/detailOriginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Origin -> Earth (C-137)"
+            android:text="@{`Origin -> ` +selectedChar.origin.name}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -179,7 +192,7 @@
             android:id="@+id/detailLocationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location -> Citadel of Ricks"
+            android:text="@{`Location -> ` +selectedChar.location.name}"
             android:textSize="18dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -199,8 +212,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="#009688"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -212,9 +227,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:paddingTop="10dp"
+            android:paddingRight="20dp"
             android:paddingBottom="10dp"
+            android:stringAppend="@{selectedChar.episode}"
             android:text="Episode(s) -> "
             android:textColor="@color/white"
             android:textSize="18dp"
@@ -234,15 +250,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/detailProgressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/detailProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -43,7 +43,7 @@ class FeedFragment : Fragment() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
             characters?.let {
                 binding.characterList.visibility = View.VISIBLE
-                recyclerAdapter.updateCountryList(it.results!!)
+                recyclerAdapter.updateCharacterList(it.results!!)
                 binding.errorText.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
             }

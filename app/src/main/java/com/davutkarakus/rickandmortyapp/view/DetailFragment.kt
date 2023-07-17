@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.davutkarakus.rickandmortyapp.R
@@ -30,7 +31,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -46,7 +47,7 @@ class DetailFragment : Fragment() {
     fun detailObserveLiveData() {
         viewModel.char.observe(viewLifecycleOwner, Observer { results->
             results?.let {
-                var newList : List<String>
+             /*   var newList : List<String>
                 it.episode?.let {
                     newList = it
                     for (i in newList) {
@@ -56,7 +57,6 @@ class DetailFragment : Fragment() {
                         }
                     }
                 }
-
                 binding.detailCharNameText.text = it.name
                 binding.detailOriginText.text = "Origin -> ${it.origin!!.name}"
                 binding.detailGenderText.text = "Gender -> ${it.gender}"
@@ -66,6 +66,10 @@ class DetailFragment : Fragment() {
                 context?.let { context->
                     binding.detailImageView.downloadFromUrl(it.image, placeholderProgressBar(context))
                 }
+
+        */
+                binding.selectedChar = it
+                binding.detailImageView.visibility = View.VISIBLE
                 binding.detailCharNameText.visibility = View.VISIBLE
                 binding.cardView.visibility = View.VISIBLE
                 binding.cardView1.visibility = View.VISIBLE
@@ -78,6 +82,7 @@ class DetailFragment : Fragment() {
         viewModel.charLoading.observe(viewLifecycleOwner, Observer { loading ->
             loading?.let {
                 if(it) {
+                    binding.detailImageView.visibility = View.GONE
                     binding.detailCharNameText.visibility = View.GONE
                     binding.cardView.visibility = View.GONE
                     binding.cardView1.visibility = View.GONE
@@ -95,6 +100,7 @@ class DetailFragment : Fragment() {
         viewModel.charError.observe(viewLifecycleOwner, Observer { error ->
             error?.let {
                 if(it) {
+                    binding.detailImageView.visibility = View.GONE
                     binding.cardView1.visibility = View.GONE
                     binding.cardView2.visibility = View.GONE
                     binding.cardView3.visibility = View.GONE
