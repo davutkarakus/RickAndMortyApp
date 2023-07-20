@@ -12,12 +12,17 @@ import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.adapter.RecyclerAdapter
 import com.davutkarakus.rickandmortyapp.databinding.FragmentFeedBinding
 import com.davutkarakus.rickandmortyapp.viewmodel.FeedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
-class FeedFragment : Fragment() {
+@AndroidEntryPoint
+ class FeedFragment @Inject constructor(
+)  : Fragment() {
+
     private lateinit var binding : FragmentFeedBinding
     private lateinit var viewModel : FeedViewModel
-
-    private val recyclerAdapter = RecyclerAdapter(arrayListOf())
+     private val recyclerAdapter = RecyclerAdapter(arrayListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +30,7 @@ class FeedFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFeedBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
         return binding.root
@@ -33,10 +38,12 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
-        viewModel.refreshData()
         binding.characterList.layoutManager = GridLayoutManager(context,2)
         binding.characterList.adapter = recyclerAdapter
+
+       // viewModel.refreshData()
         observeLiveData()
     }
     fun observeLiveData() {

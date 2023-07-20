@@ -19,7 +19,11 @@ class CharacterDetailApiService {
         .build()
         .create(CharacterDetailApi::class.java)
 
-    fun getChar(id:Int) : Single<Result> {
+  /*  fun getChar(id:Int) : Single<Result> {
         return api.getCharacter(id)
     }
+
+   */
+
+
 }

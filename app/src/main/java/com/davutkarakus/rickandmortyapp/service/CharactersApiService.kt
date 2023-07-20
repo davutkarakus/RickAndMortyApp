@@ -17,7 +17,8 @@ class CharactersApiService {
         .build()
         .create(CharactersApi::class.java)
 
-    fun getData() : Single<Characters> {
-        return api.getAllCharacters()
-    }
+   // fun getData() : Single<Characters> {
+    //    return api.getAllCharacters()
+   // }
+
 }

@@ -15,8 +15,11 @@ import com.davutkarakus.rickandmortyapp.databinding.FragmentFeedBinding
 import com.davutkarakus.rickandmortyapp.util.downloadFromUrl
 import com.davutkarakus.rickandmortyapp.util.placeholderProgressBar
 import com.davutkarakus.rickandmortyapp.viewmodel.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class DetailFragment : Fragment() {
+@AndroidEntryPoint
+class DetailFragment @Inject constructor() : Fragment() {
     private lateinit var viewModel : DetailViewModel
     private lateinit var binding : FragmentDetailBinding
     private var charId = 0
@@ -30,7 +33,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
         // Inflate the layout for this fragment
         return binding.root
@@ -40,7 +43,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        viewModel.refreshData(charId)
+        context?.let { viewModel.getData(charId, it) }
         detailObserveLiveData()
     }
 
@@ -101,6 +104,7 @@ class DetailFragment : Fragment() {
             error?.let {
                 if(it) {
                     binding.detailImageView.visibility = View.GONE
+                    binding.cardView.visibility = View.GONE
                     binding.cardView1.visibility = View.GONE
                     binding.cardView2.visibility = View.GONE
                     binding.cardView3.visibility = View.GONE
