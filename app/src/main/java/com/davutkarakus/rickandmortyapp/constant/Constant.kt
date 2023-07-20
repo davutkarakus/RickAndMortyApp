@@ -1,4 +1,4 @@
-package com.davutkarakus.rickandmortyapp.Constant
+package com.davutkarakus.rickandmortyapp.constant
 
 object Constant {
     const val BASE_URL = "https://rickandmortyapi.com/"

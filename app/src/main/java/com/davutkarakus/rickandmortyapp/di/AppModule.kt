@@ -1,9 +1,8 @@
 package com.davutkarakus.rickandmortyapp.di
 
-import com.davutkarakus.rickandmortyapp.Constant.Constant.BASE_URL
+import com.davutkarakus.rickandmortyapp.constant.Constant.BASE_URL
 import com.davutkarakus.rickandmortyapp.service.CharacterDetailApi
 import com.davutkarakus.rickandmortyapp.service.CharactersApi
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
