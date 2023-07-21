@@ -31,6 +31,7 @@ fun placeholderProgressBar(context: Context) : CircularProgressDrawable {
 fun downloadImage(v:ImageView,url: String?) {
     v.downloadFromUrl(url, placeholderProgressBar(v.context))
 }
+
 @BindingAdapter("android:stringAppend")
 fun stringAppend(t:TextView,episodes: List<String>?) {
     var newList : List<String>

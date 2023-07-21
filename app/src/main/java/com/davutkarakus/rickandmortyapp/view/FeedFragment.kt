@@ -7,22 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import com.davutkarakus.rickandmortyapp.R
-import com.davutkarakus.rickandmortyapp.adapter.RecyclerAdapter
+import com.davutkarakus.rickandmortyapp.adapter.MainRecyclerViewAdapter
 import com.davutkarakus.rickandmortyapp.databinding.FragmentFeedBinding
+import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
 import com.davutkarakus.rickandmortyapp.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @AndroidEntryPoint
  class FeedFragment @Inject constructor(
-)  : Fragment() {
+)  : Fragment() ,MainRecyclerViewAdapter.OnItemClickListener{
 
     private lateinit var binding : FragmentFeedBinding
     private lateinit var viewModel : FeedViewModel
-     private val recyclerAdapter = RecyclerAdapter(arrayListOf())
+     private val mainRecyclerViewAdapter = MainRecyclerViewAdapter(arrayListOf(),this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -38,19 +38,17 @@ import javax.inject.Inject
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
         binding.characterList.layoutManager = GridLayoutManager(context,2)
-        binding.characterList.adapter = recyclerAdapter
-
+        binding.characterList.adapter = mainRecyclerViewAdapter
        // viewModel.refreshData()
         observeLiveData()
     }
-    fun observeLiveData() {
+    private fun observeLiveData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
             characters?.let {
                 binding.characterList.visibility = View.VISIBLE
-                recyclerAdapter.updateCharacterList(it.results!!)
+                mainRecyclerViewAdapter.updateCharacterList(it.results ?: listOf())
                 binding.errorText.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
             }
@@ -82,4 +80,10 @@ import javax.inject.Inject
         })
     }
 
+    override fun onItemClickListenerMovies(v:View) {
+        val binding = v.tag as? RecyclerRowBinding ?: return
+        val uuid = binding.character?.id ?: return
+        val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
+        Navigation.findNavController(v).navigate(action)
+    }
 }

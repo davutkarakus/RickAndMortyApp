@@ -9,11 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.davutkarakus.rickandmortyapp.R
-import com.davutkarakus.rickandmortyapp.adapter.RecyclerAdapter
 import com.davutkarakus.rickandmortyapp.databinding.FragmentDetailBinding
-import com.davutkarakus.rickandmortyapp.databinding.FragmentFeedBinding
-import com.davutkarakus.rickandmortyapp.util.downloadFromUrl
-import com.davutkarakus.rickandmortyapp.util.placeholderProgressBar
 import com.davutkarakus.rickandmortyapp.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -72,27 +68,13 @@ class DetailFragment @Inject constructor() : Fragment() {
 
         */
                 binding.selectedChar = it
-                binding.detailImageView.visibility = View.VISIBLE
-                binding.detailCharNameText.visibility = View.VISIBLE
-                binding.cardView.visibility = View.VISIBLE
-                binding.cardView1.visibility = View.VISIBLE
-                binding.cardView2.visibility = View.VISIBLE
-                binding.cardView3.visibility = View.VISIBLE
-                binding.cardView4.visibility = View.VISIBLE
-                binding.cardView5.visibility = View.VISIBLE
+                binding.itemVisibility = 0
             }
         })
         viewModel.charLoading.observe(viewLifecycleOwner, Observer { loading ->
             loading?.let {
                 if(it) {
-                    binding.detailImageView.visibility = View.GONE
-                    binding.detailCharNameText.visibility = View.GONE
-                    binding.cardView.visibility = View.GONE
-                    binding.cardView1.visibility = View.GONE
-                    binding.cardView2.visibility = View.GONE
-                    binding.cardView3.visibility = View.GONE
-                    binding.cardView4.visibility = View.GONE
-                    binding.cardView5.visibility = View.GONE
+                    binding.itemVisibility = 8
                     binding.detailProgressBar.visibility = View.VISIBLE
                     binding.detailErrorText.visibility = View.GONE
                 }else {
@@ -103,13 +85,7 @@ class DetailFragment @Inject constructor() : Fragment() {
         viewModel.charError.observe(viewLifecycleOwner, Observer { error ->
             error?.let {
                 if(it) {
-                    binding.detailImageView.visibility = View.GONE
-                    binding.cardView.visibility = View.GONE
-                    binding.cardView1.visibility = View.GONE
-                    binding.cardView2.visibility = View.GONE
-                    binding.cardView3.visibility = View.GONE
-                    binding.cardView4.visibility = View.GONE
-                    binding.cardView5.visibility = View.GONE
+                    binding.itemVisibility = 8
                     binding.detailProgressBar.visibility = View.GONE
                     binding.detailErrorText.visibility = View.VISIBLE
                 }else {

@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CharacterDetailApiService {
 
     //https://rickandmortyapi.com/api/character/1
-
     private val BASE_URL = "https://rickandmortyapi.com/"
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)

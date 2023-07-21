@@ -8,17 +8,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
-import com.davutkarakus.rickandmortyapp.model.Characters
 import com.davutkarakus.rickandmortyapp.model.Result
-import com.davutkarakus.rickandmortyapp.util.downloadFromUrl
-import com.davutkarakus.rickandmortyapp.util.placeholderProgressBar
 import com.davutkarakus.rickandmortyapp.view.FeedFragment
 import com.davutkarakus.rickandmortyapp.view.FeedFragmentDirections
 
-class RecyclerAdapter(var characterList:ArrayList<Result>) :  RecyclerView.Adapter<RecyclerAdapter.RvHolder>(),CharacterClickListener{
+class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
     // private lateinit var binding : RecyclerRowBinding
     class RvHolder(var view:RecyclerRowBinding) : RecyclerView.ViewHolder(view.root) {
-
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -49,13 +45,11 @@ class RecyclerAdapter(var characterList:ArrayList<Result>) :  RecyclerView.Adapt
     fun updateCharacterList(newCharacterList:List<Result>){
         characterList.clear()
         characterList.addAll(newCharacterList)
-        notifyDataSetChanged()
     }
-
     override fun onCharacterClicked(v: View) {
-        val binding = v.tag as? RecyclerRowBinding ?: return
-        val uuid = binding.character?.id ?: return
-        val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
-        Navigation.findNavController(v).navigate(action)
+        listener.onItemClickListenerMovies(v)
+    }
+    interface OnItemClickListener {
+        fun onItemClickListenerMovies(v:View)
     }
 }

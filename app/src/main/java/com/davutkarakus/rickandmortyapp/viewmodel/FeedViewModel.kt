@@ -23,8 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(private val repository: CharactersRepository,@ApplicationContext context: Context) : ViewModel() {
-    private val charactersApiService = CharactersApiService()
-    private val disposable = CompositeDisposable()
+    // private val charactersApiService = CharactersApiService()
+    // private val disposable = CompositeDisposable()
 
     val _characters = MutableLiveData<Characters>()
     val charactersError = MutableLiveData<Boolean>()
@@ -87,5 +87,4 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
        }
 
      */
-
 }

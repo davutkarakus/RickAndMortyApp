@@ -23,8 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repo:CharactersRepository) : ViewModel() {
-    private val characterDetailApiService = CharacterDetailApiService()
-    private val disposable = CompositeDisposable()
+    // private val characterDetailApiService = CharacterDetailApiService()
+    // private val disposable = CompositeDisposable()
     val _char = MutableLiveData<Result>()
     val charLoading = MutableLiveData<Boolean>()
     val charError = MutableLiveData<Boolean>()

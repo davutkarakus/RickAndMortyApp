@@ -17,21 +17,22 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun getRetrofitInstance():CharactersApi {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CharactersApi::class.java)
+    fun getRetrofitServiceInstanceForDetail(retrofit: Retrofit):CharacterDetailApi {
+        return retrofit.create(CharacterDetailApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun getRetrofitServiceInstanceForDetail():CharacterDetailApi {
+    fun getRetrofitServiceInstanceForFeed(retrofit: Retrofit):CharactersApi {
+        return retrofit.create(CharactersApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun getRetrofitInstance():Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CharacterDetailApi::class.java)
     }
 }

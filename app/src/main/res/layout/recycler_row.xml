@@ -9,6 +9,7 @@
         <variable
             name="listener"
             type="com.davutkarakus.rickandmortyapp.adapter.CharacterClickListener" />
+
     </data>
 
     <LinearLayout
