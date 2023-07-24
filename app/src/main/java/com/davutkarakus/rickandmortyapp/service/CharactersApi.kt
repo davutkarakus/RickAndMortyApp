@@ -1,7 +1,6 @@
 package com.davutkarakus.rickandmortyapp.service
 
 import com.davutkarakus.rickandmortyapp.model.Characters
-import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 

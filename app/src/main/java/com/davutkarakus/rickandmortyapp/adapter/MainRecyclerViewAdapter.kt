@@ -4,13 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
 import com.davutkarakus.rickandmortyapp.model.Result
-import com.davutkarakus.rickandmortyapp.view.FeedFragment
-import com.davutkarakus.rickandmortyapp.view.FeedFragmentDirections
 
 class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
     // private lateinit var binding : RecyclerRowBinding

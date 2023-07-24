@@ -7,17 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.davutkarakus.rickandmortyapp.model.Characters
 import com.davutkarakus.rickandmortyapp.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
-import com.davutkarakus.rickandmortyapp.service.CharacterDetailApiService
-import com.davutkarakus.rickandmortyapp.service.CharactersApi
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

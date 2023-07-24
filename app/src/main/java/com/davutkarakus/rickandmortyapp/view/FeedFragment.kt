@@ -38,7 +38,7 @@ import javax.inject.Inject
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+        viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         binding.characterList.layoutManager = GridLayoutManager(context,2)
         binding.characterList.adapter = mainRecyclerViewAdapter
        // viewModel.refreshData()
@@ -79,7 +79,6 @@ import javax.inject.Inject
 
         })
     }
-
     override fun onItemClickListenerMovies(v:View) {
         val binding = v.tag as? RecyclerRowBinding ?: return
         val uuid = binding.character?.id ?: return

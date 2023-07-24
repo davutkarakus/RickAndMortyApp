@@ -6,11 +6,11 @@
     >
     <data>
         <variable
-            name="selectedChar"
-            type="com.davutkarakus.rickandmortyapp.model.Result" />
-        <variable
             name="itemVisibility"
             type="int" />
+        <variable
+            name="viewModel"
+            type="com.davutkarakus.rickandmortyapp.viewmodel.DetailViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         <ImageView
             android:id="@+id/detailImageView"
             android:layout_width="200dp"
-            android:downloadUrl="@{selectedChar.image}"
+            android:downloadUrl="@{viewModel._char.image}"
             android:layout_height="200dp"
             android:scaleType="fitXY"
              />
@@ -49,9 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@{selectedChar.name}"
+        android:text="@{viewModel._char.name}"
         android:textSize="20dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#009688"
         app:cardCornerRadius="10dp"
@@ -77,7 +77,7 @@
             android:id="@+id/detailStatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`Status -> ` +selectedChar.status}"
+            android:text="@{`Status -> ` +viewModel._char.status}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#009688"
@@ -108,7 +108,7 @@
             android:id="@+id/detailSpeciesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`Species -> ` +selectedChar.species}"
+            android:text="@{`Species -> ` +viewModel._char.species}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -124,7 +124,7 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -138,7 +138,7 @@
             android:id="@+id/detailGenderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`Gender -> ` +selectedChar.gender}"
+            android:text="@{`Gender -> ` +viewModel._char.gender}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -156,7 +156,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#009688"
@@ -170,7 +170,7 @@
             android:id="@+id/detailOriginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`Origin -> ` +selectedChar.origin.name}"
+            android:text="@{`Origin -> ` +viewModel._char.origin.name}"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -188,7 +188,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#009688"
@@ -202,7 +202,7 @@
             android:id="@+id/detailLocationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`Location -> ` +selectedChar.location.name}"
+            android:text="@{`Location -> ` +viewModel._char.location.name}"
             android:textSize="18dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -220,7 +220,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:visibility="@{itemVisibility}"
+        android:visibility="@{viewModel.charLoading || viewModel.charError ? 8 : 0}"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
@@ -241,25 +241,14 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:stringAppend="@{selectedChar.episode}"
+            android:stringAppend="@{viewModel._char.episode}"
             android:text="Episode(s) -> "
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold"></TextView>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/detailErrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Error ! Try Again"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -270,7 +259,20 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="@{viewModel.charLoading ? 0 : 8}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detailErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error ! Try Again"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:visibility="@{viewModel.charError ? 0 : 8}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

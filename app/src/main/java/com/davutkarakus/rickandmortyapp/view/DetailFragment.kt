@@ -39,11 +39,13 @@ class DetailFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         context?.let { viewModel.getData(charId, it) }
-        detailObserveLiveData()
+       // detailObserveLiveData()
     }
 
-    fun detailObserveLiveData() {
+  /*  fun detailObserveLiveData() {
         viewModel.char.observe(viewLifecycleOwner, Observer { results->
             results?.let {
              /*   var newList : List<String>
@@ -67,14 +69,14 @@ class DetailFragment @Inject constructor() : Fragment() {
                 }
 
         */
-                binding.selectedChar = it
-                binding.itemVisibility = 0
+          //      binding.selectedChar = it
+          //      binding.itemVisibility = 0
             }
         })
         viewModel.charLoading.observe(viewLifecycleOwner, Observer { loading ->
             loading?.let {
                 if(it) {
-                    binding.itemVisibility = 8
+                   // binding.itemVisibility = 8
                     binding.detailProgressBar.visibility = View.VISIBLE
                     binding.detailErrorText.visibility = View.GONE
                 }else {
@@ -85,7 +87,7 @@ class DetailFragment @Inject constructor() : Fragment() {
         viewModel.charError.observe(viewLifecycleOwner, Observer { error ->
             error?.let {
                 if(it) {
-                    binding.itemVisibility = 8
+                  //  binding.itemVisibility = 8
                     binding.detailProgressBar.visibility = View.GONE
                     binding.detailErrorText.visibility = View.VISIBLE
                 }else {
@@ -95,5 +97,7 @@ class DetailFragment @Inject constructor() : Fragment() {
             }
         })
     }
+
+   */
 
 }

@@ -1,8 +1,5 @@
 package com.davutkarakus.rickandmortyapp.service
 
-import com.davutkarakus.rickandmortyapp.model.Characters
-import com.davutkarakus.rickandmortyapp.model.Result
-import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

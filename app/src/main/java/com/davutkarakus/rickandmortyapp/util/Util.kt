@@ -8,7 +8,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.davutkarakus.rickandmortyapp.R
-import com.davutkarakus.rickandmortyapp.model.Result
 
 fun ImageView.downloadFromUrl(url:String?,progressDrawable: CircularProgressDrawable) {
     val options = RequestOptions()
