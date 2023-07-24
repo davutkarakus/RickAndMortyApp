@@ -18,5 +18,4 @@ class CharactersApiService {
    // fun getData() : Single<Characters> {
     //    return api.getAllCharacters()
    // }
-
 }

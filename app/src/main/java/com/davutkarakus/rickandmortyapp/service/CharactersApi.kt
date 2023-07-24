@@ -9,5 +9,4 @@ interface CharactersApi {
 
     @GET("api/character")
     suspend fun getAllCharacters() : Response<Characters>
-
 }

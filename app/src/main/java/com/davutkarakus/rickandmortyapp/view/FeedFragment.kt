@@ -22,7 +22,7 @@ import javax.inject.Inject
 
     private lateinit var binding : FragmentFeedBinding
     private lateinit var viewModel : FeedViewModel
-     private val mainRecyclerViewAdapter = MainRecyclerViewAdapter(arrayListOf(),this)
+    private val mainRecyclerViewAdapter = MainRecyclerViewAdapter(arrayListOf(),this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -38,16 +38,26 @@ import javax.inject.Inject
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         binding.characterList.layoutManager = GridLayoutManager(context,2)
         binding.characterList.adapter = mainRecyclerViewAdapter
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        observeData()
+       // viewModel.refreshData()
+     //   observeLiveData()
+    }
+    private fun observeData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer {
             mainRecyclerViewAdapter.updateCharacterList(it.results ?: listOf())
         })
-       // viewModel.refreshData()
-     //   observeLiveData()
+        }
+    override fun onItemClickListenerMovies(v:View) {
+        val binding = v.tag as? RecyclerRowBinding ?: return
+        val uuid = binding.character?.id ?: return
+        val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
+        Navigation.findNavController(v).navigate(action)
     }
 /*    private fun observeLiveData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
@@ -67,7 +77,6 @@ import javax.inject.Inject
                 }else {
                     binding.progressBar.visibility = View.GONE
                 }
-
             }
         })
         viewModel.charactersError.observe(viewLifecycleOwner, Observer { error ->
@@ -79,18 +88,8 @@ import javax.inject.Inject
                 }else {
                     binding.errorText.visibility = View.GONE
                 }
-
             }
-
         })
     }
     */
-
-    override fun onItemClickListenerMovies(v:View) {
-        val binding = v.tag as? RecyclerRowBinding ?: return
-        val uuid = binding.character?.id ?: return
-        val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
-        Navigation.findNavController(v).navigate(action)
-    }
-
 }

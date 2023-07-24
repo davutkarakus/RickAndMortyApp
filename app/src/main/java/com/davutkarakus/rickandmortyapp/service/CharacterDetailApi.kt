@@ -6,10 +6,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CharacterDetailApi {
-
     //https://rickandmortyapi.com/api/character/1
 
     @GET("api/character/{id}")
     suspend fun getCharacter(@Path("id") id:Int) : Response<Result>
-
 }

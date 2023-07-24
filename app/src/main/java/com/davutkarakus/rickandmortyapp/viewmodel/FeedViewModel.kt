@@ -12,6 +12,7 @@ import com.davutkarakus.rickandmortyapp.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -54,11 +55,9 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
             }
         }
     }
-
     /*  fun refreshData() {
          getDataFromApi()
        }
-
        private fun getDataFromApi() {
            charactersLoading.value = true
            disposable.add(
@@ -80,6 +79,5 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
                    })
            )
        }
-
      */
 }

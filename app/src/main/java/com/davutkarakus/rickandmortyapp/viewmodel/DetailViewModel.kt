@@ -20,8 +20,8 @@ class DetailViewModel @Inject constructor(private val repo:CharactersRepository)
     val _char = MutableLiveData<Result>()
     val charLoading = MutableLiveData<Boolean>()
     val charError = MutableLiveData<Boolean>()
-    val char:LiveData<Result>
-    get() = _char
+    //val char:LiveData<Result>
+    //get() = _char
 
     fun getData(id:Int,context: Context) {
         charLoading.value = true
@@ -50,8 +50,6 @@ class DetailViewModel @Inject constructor(private val repo:CharactersRepository)
             }
         }
     }
-
-
 /*
     fun refreshData(id:Int){
         getCharFromApi(id)
@@ -68,16 +66,13 @@ class DetailViewModel @Inject constructor(private val repo:CharactersRepository)
                         charError.value = false
                         charLoading.value = false
                     }
-
                     override fun onError(e: Throwable) {
                         charError.value = true
                         charLoading.value = false
                         e.printStackTrace()
                     }
-
                 })
         )
     }
-
  */
 }

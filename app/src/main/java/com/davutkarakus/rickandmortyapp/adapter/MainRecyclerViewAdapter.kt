@@ -19,7 +19,6 @@ class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val li
         val view = DataBindingUtil.inflate<RecyclerRowBinding>(inflater, R.layout.recycler_row,parent,false)
         return RvHolder(view)
     }
-
     override fun onBindViewHolder(holder: RvHolder, position: Int) {
         holder.view.character = characterList[position]
         holder.view.listener = this

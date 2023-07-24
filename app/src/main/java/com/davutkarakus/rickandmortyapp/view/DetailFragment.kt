@@ -41,10 +41,14 @@ class DetailFragment @Inject constructor() : Fragment() {
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        context?.let { viewModel.getData(charId, it) }
+        getData()
        // detailObserveLiveData()
     }
-
+    private fun getData() {
+        context?.let {
+            viewModel.getData(charId, it)
+        }
+    }
   /*  fun detailObserveLiveData() {
         viewModel.char.observe(viewLifecycleOwner, Observer { results->
             results?.let {
@@ -67,7 +71,6 @@ class DetailFragment @Inject constructor() : Fragment() {
                 context?.let { context->
                     binding.detailImageView.downloadFromUrl(it.image, placeholderProgressBar(context))
                 }
-
         */
                 binding.selectedChar = it
                 binding.itemVisibility = 0
@@ -93,11 +96,8 @@ class DetailFragment @Inject constructor() : Fragment() {
                 }else {
                     binding.detailErrorText.visibility = View.GONE
                 }
-
             }
         })
     }
-
    */
-
 }
