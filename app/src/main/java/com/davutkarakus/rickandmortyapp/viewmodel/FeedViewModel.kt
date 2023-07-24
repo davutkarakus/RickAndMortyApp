@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davutkarakus.rickandmortyapp.model.Characters
+import com.davutkarakus.rickandmortyapp.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,7 +21,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
     // private val charactersApiService = CharactersApiService()
     // private val disposable = CompositeDisposable()
 
-    val _characters = MutableLiveData<Characters>()
+    private val _characters = MutableLiveData<Characters>()
     val charactersError = MutableLiveData<Boolean>()
     val charactersLoading = MutableLiveData<Boolean>()
     val characters:LiveData<Characters>

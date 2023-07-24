@@ -69,8 +69,8 @@ class DetailFragment @Inject constructor() : Fragment() {
                 }
 
         */
-          //      binding.selectedChar = it
-          //      binding.itemVisibility = 0
+                binding.selectedChar = it
+                binding.itemVisibility = 0
             }
         })
         viewModel.charLoading.observe(viewLifecycleOwner, Observer { loading ->

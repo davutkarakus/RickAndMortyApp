@@ -41,10 +41,15 @@ import javax.inject.Inject
         viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         binding.characterList.layoutManager = GridLayoutManager(context,2)
         binding.characterList.adapter = mainRecyclerViewAdapter
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.characters.observe(viewLifecycleOwner, Observer {
+            mainRecyclerViewAdapter.updateCharacterList(it.results ?: listOf())
+        })
        // viewModel.refreshData()
-        observeLiveData()
+     //   observeLiveData()
     }
-    private fun observeLiveData() {
+/*    private fun observeLiveData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
             characters?.let {
                 binding.characterList.visibility = View.VISIBLE
@@ -79,10 +84,13 @@ import javax.inject.Inject
 
         })
     }
+    */
+
     override fun onItemClickListenerMovies(v:View) {
         val binding = v.tag as? RecyclerRowBinding ?: return
         val uuid = binding.character?.id ?: return
         val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
         Navigation.findNavController(v).navigate(action)
     }
+
 }

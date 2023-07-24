@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.davutkarakus.rickandmortyapp.viewmodel.FeedViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,6 +18,7 @@
         android:id="@+id/characterList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="@{viewModel.charactersLoading || viewModel.charactersError ? 8 : 0}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +29,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="@{viewModel.charactersLoading ? 0 : 8}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Error! Try Again"
-        android:visibility="gone"
+        android:visibility="@{viewModel.charactersError ? 0 : 8}"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
