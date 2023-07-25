@@ -1,6 +1,7 @@
 package com.davutkarakus.rickandmortyapp.util
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -44,4 +45,10 @@ fun stringAppend(t:TextView,episodes: List<String>?) {
         }
     }
 
+}
+
+fun isWifiEnabled(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+    return networkInfo?.isConnectedOrConnecting ?: false
 }

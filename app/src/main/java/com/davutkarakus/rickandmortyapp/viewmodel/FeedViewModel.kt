@@ -1,18 +1,16 @@
 package com.davutkarakus.rickandmortyapp.viewmodel
 
 import android.content.Context
-import android.net.ConnectivityManager
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davutkarakus.rickandmortyapp.model.Characters
-import com.davutkarakus.rickandmortyapp.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
+import com.davutkarakus.rickandmortyapp.util.isWifiEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,11 +35,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
             charactersError.value = true
         }
     }
-    fun isWifiEnabled(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        return networkInfo?.isConnectedOrConnecting ?: false
-    }
+
     private fun getAllCharacters() = viewModelScope.launch {
         charactersLoading.value = true
         repository.getAllCharacters().let { response ->
