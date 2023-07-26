@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.databinding.FragmentDetailBinding
@@ -42,62 +41,10 @@ class DetailFragment @Inject constructor() : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         getData()
-       // detailObserveLiveData()
     }
     private fun getData() {
         context?.let {
             viewModel.getData(charId, it)
         }
     }
-  /*  fun detailObserveLiveData() {
-        viewModel.char.observe(viewLifecycleOwner, Observer { results->
-            results?.let {
-             /*   var newList : List<String>
-                it.episode?.let {
-                    newList = it
-                    for (i in newList) {
-                        newList = i.split("https://rickandmortyapi.com/api/episode/")
-                        for (a in newList) {
-                            binding.detailEpisodeText.append("${a} ")
-                        }
-                    }
-                }
-                binding.detailCharNameText.text = it.name
-                binding.detailOriginText.text = "Origin -> ${it.origin!!.name}"
-                binding.detailGenderText.text = "Gender -> ${it.gender}"
-                binding.detailLocationText.text = "Location -> ${it.location!!.name}"
-                binding.detailStatusText.text = "Status -> ${it.status}"
-                binding.detailSpeciesText.text = "Species -> ${it.species}"
-                context?.let { context->
-                    binding.detailImageView.downloadFromUrl(it.image, placeholderProgressBar(context))
-                }
-        */
-                binding.selectedChar = it
-                binding.itemVisibility = 0
-            }
-        })
-        viewModel.charLoading.observe(viewLifecycleOwner, Observer { loading ->
-            loading?.let {
-                if(it) {
-                   // binding.itemVisibility = 8
-                    binding.detailProgressBar.visibility = View.VISIBLE
-                    binding.detailErrorText.visibility = View.GONE
-                }else {
-                    binding.detailProgressBar.visibility = View.GONE
-                }
-            }
-        })
-        viewModel.charError.observe(viewLifecycleOwner, Observer { error ->
-            error?.let {
-                if(it) {
-                  //  binding.itemVisibility = 8
-                    binding.detailProgressBar.visibility = View.GONE
-                    binding.detailErrorText.visibility = View.VISIBLE
-                }else {
-                    binding.detailErrorText.visibility = View.GONE
-                }
-            }
-        })
-    }
-   */
 }

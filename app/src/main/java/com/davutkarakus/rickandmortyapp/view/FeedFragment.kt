@@ -45,8 +45,6 @@ import javax.inject.Inject
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         observeData()
-       // viewModel.refreshData()
-     //   observeLiveData()
     }
     private fun observeData() {
         viewModel.characters.observe(viewLifecycleOwner, Observer {
@@ -59,37 +57,4 @@ import javax.inject.Inject
         val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
         Navigation.findNavController(v).navigate(action)
     }
-/*    private fun observeLiveData() {
-        viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
-            characters?.let {
-                binding.characterList.visibility = View.VISIBLE
-                mainRecyclerViewAdapter.updateCharacterList(it.results ?: listOf())
-                binding.errorText.visibility = View.GONE
-                binding.progressBar.visibility = View.GONE
-            }
-        })
-        viewModel.charactersLoading.observe(viewLifecycleOwner, Observer { loading ->
-            loading?.let {
-                if(it) {
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.characterList.visibility = View.GONE
-                    binding.errorText.visibility = View.GONE
-                }else {
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        })
-        viewModel.charactersError.observe(viewLifecycleOwner, Observer { error ->
-            error?.let {
-                if(it) {
-                    binding.errorText.visibility = View.VISIBLE
-                    binding.characterList.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
-                }else {
-                    binding.errorText.visibility = View.GONE
-                }
-            }
-        })
-    }
-    */
 }

@@ -17,8 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(private val repository: CharactersRepository,@ApplicationContext context: Context) : ViewModel() {
-    // private val charactersApiService = CharactersApiService()
-    // private val disposable = CompositeDisposable()
 
     private val _characters = MutableLiveData<Characters>()
     val charactersError = MutableLiveData<Boolean>()
@@ -49,29 +47,4 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
             }
         }
     }
-    /*  fun refreshData() {
-         getDataFromApi()
-       }
-       private fun getDataFromApi() {
-           charactersLoading.value = true
-           disposable.add(
-               charactersApiService.getData()
-                   .subscribeOn(Schedulers.newThread())
-                   .observeOn(AndroidSchedulers.mainThread())
-                   .subscribeWith(object : DisposableSingleObserver<Characters>(){
-                       override fun onSuccess(t: Characters) {
-                           characters.value = t
-                           charactersError.value = false
-                           charactersLoading.value = false
-                       }
-
-                       override fun onError(e: Throwable) {
-                           charactersError.value = true
-                           charactersLoading.value = false
-                           e.printStackTrace()
-                       }
-                   })
-           )
-       }
-     */
 }

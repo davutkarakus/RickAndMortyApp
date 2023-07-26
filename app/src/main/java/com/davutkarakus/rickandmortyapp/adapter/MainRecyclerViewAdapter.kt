@@ -23,17 +23,6 @@ class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val li
         holder.view.character = characterList[position]
         holder.view.listener = this
         holder.view.root.tag = holder.view
-        /*
-        holder.view.nameText.text = characterList[position].name
-        holder.view.speciesText.text = characterList[position].species
-        holder.view.imageView.downloadFromUrl(characterList[position].image, placeholderProgressBar(holder.itemView.context))
-        holder.itemView.setOnClickListener {
-            characterList[position].id?.let { id->
-                val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(id)
-                Navigation.findNavController(it).navigate(action)
-            }
-        }
-         */
     }
     override fun getItemCount(): Int {
         return characterList.size
