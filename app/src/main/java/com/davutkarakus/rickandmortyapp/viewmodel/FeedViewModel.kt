@@ -2,6 +2,7 @@ package com.davutkarakus.rickandmortyapp.viewmodel
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
 import com.davutkarakus.rickandmortyapp.util.isWifiEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +32,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
         if(repository.getAllCharactersDao().isEmpty()) {
             getDataFromApi(context)
         }else {
-            getDataFromDao()
+            getDataFromDao(context)
         }
     }
      fun getDataFromApi(context: Context) = viewModelScope.launch{
@@ -41,8 +43,10 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
                  if(response.isSuccessful){
                      _characters.postValue(response.body()?.results ?: listOf())
                      deleteAllCharacters()
-                     println("Apiden veriler alındı")
-                     response.body()?.results?.let { insertAllCharacters(it) }
+                     response.body()?.results?.let {
+                         insertAllCharacters(it)
+                     }
+                     Toast.makeText(context,"From Api",Toast.LENGTH_LONG).show()
                      charactersLoading.value = false
                  }else{
                      charactersLoading.value = false
@@ -56,7 +60,6 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
              charactersError.value = true
              Log.i("FeedViewModel","Internet Connection Problem!")
          }
-
     }
     fun insertAllCharacters(list:List<Result>) = viewModelScope.launch {
         repository.insertCharactersDao(*list.toTypedArray())
@@ -64,9 +67,10 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
     fun deleteAllCharacters() = viewModelScope.launch {
         repository.deleteAllCharactersDao()
     }
-    fun getDataFromDao() = viewModelScope.launch {
+    fun getDataFromDao(context: Context) = viewModelScope.launch (Dispatchers.Main) {
         _characters.postValue(repository.getAllCharactersDao())
-        println("Roomdan veriler alındı")
+        println(repository.getAllCharactersDao())
+        Toast.makeText(context,"From Room",Toast.LENGTH_LONG).show()
         charactersLoading.value = false
     }
 }
