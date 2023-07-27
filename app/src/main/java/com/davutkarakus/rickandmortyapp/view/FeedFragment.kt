@@ -44,13 +44,18 @@ import javax.inject.Inject
         binding.characterList.adapter = mainRecyclerViewAdapter
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        observeData()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            context?.let { viewModel.getDataFromApi(it) }
+        }
+        getData()
     }
-    private fun observeData() {
-        viewModel.characters.observe(viewLifecycleOwner, Observer {
-            mainRecyclerViewAdapter.updateCharacterList(it.results ?: listOf())
+    private fun getData() {
+        viewModel.characters.observe(viewLifecycleOwner,Observer{
+            mainRecyclerViewAdapter.updateCharacterList(it)
         })
         }
+
     override fun onItemClickListenerMovies(v:View) {
         val binding = v.tag as? RecyclerRowBinding ?: return
         val uuid = binding.character?.id ?: return

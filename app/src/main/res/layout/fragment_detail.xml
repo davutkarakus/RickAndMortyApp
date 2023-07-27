@@ -6,9 +6,6 @@
     >
     <data>
         <variable
-            name="itemVisibility"
-            type="int" />
-        <variable
             name="viewModel"
             type="com.davutkarakus.rickandmortyapp.viewmodel.DetailViewModel" />
 

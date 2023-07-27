@@ -10,12 +10,10 @@ import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
 import com.davutkarakus.rickandmortyapp.model.Result
 
 class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
-    // private lateinit var binding : RecyclerRowBinding
     class RvHolder(var view:RecyclerRowBinding) : RecyclerView.ViewHolder(view.root) {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
         val inflater = LayoutInflater.from(parent.context)
-        // binding = RecyclerRowBinding.inflate(inflater,parent,false)
         val view = DataBindingUtil.inflate<RecyclerRowBinding>(inflater, R.layout.recycler_row,parent,false)
         return RvHolder(view)
     }

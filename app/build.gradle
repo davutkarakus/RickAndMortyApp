@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
     buildFeatures {
         viewBinding true
     }
@@ -39,6 +39,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.davutkarakus.rickandmortyapp'
 }
 
 dependencies {
