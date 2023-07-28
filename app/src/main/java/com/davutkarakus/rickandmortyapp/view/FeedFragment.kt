@@ -44,10 +44,6 @@ import javax.inject.Inject
         binding.characterList.adapter = mainRecyclerViewAdapter
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
-            getDataFromApi()
-        }
         getData()
     }
     private fun getData() {
@@ -55,11 +51,7 @@ import javax.inject.Inject
             mainRecyclerViewAdapter.updateCharacterList(it)
         })
         }
-    private fun getDataFromApi() {
-        context?.let {
-            viewModel.getDataFromApi(it)
-        }
-    }
+
     override fun onItemClickListenerMovies(v:View) {
         val binding = v.tag as? RecyclerRowBinding ?: return
         val uuid = binding.character?.id ?: return

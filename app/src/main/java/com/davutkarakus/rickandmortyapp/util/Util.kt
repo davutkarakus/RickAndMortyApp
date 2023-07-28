@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.davutkarakus.rickandmortyapp.R
@@ -51,4 +52,16 @@ fun isWifiEnabled(context: Context): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
     return networkInfo?.isConnectedOrConnecting ?: false
+}
+
+@BindingAdapter("android:onRefreshListener")
+fun setOnRefreshListener(swipeRefreshLayout: SwipeRefreshLayout, onRefreshListener: () -> Unit) {
+    swipeRefreshLayout.setOnRefreshListener {
+        onRefreshListener.invoke()
+    }
+}
+
+@BindingAdapter("android:refreshing")
+fun isRefreshing(sRL:SwipeRefreshLayout,bool:Boolean){
+    sRL.isRefreshing = bool
 }

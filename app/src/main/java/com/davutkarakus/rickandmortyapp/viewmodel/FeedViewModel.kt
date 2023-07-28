@@ -2,7 +2,6 @@ package com.davutkarakus.rickandmortyapp.viewmodel
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,7 +31,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
         if(repository.getAllCharactersDao().isEmpty()) {
             getDataFromApi(context)
         }else {
-            getDataFromDao(context)
+            getDataFromDao()
         }
     }
      fun getDataFromApi(context: Context) = viewModelScope.launch{
@@ -46,7 +45,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
                      response.body()?.results?.let {
                          insertAllCharacters(it)
                      }
-                     Toast.makeText(context,"From Api",Toast.LENGTH_LONG).show()
+                     println("VERİLER APİDEN GELDİ")
                      charactersLoading.value = false
                  }else{
                      charactersLoading.value = false
@@ -67,10 +66,14 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
     fun deleteAllCharacters() = viewModelScope.launch {
         repository.deleteAllCharactersDao()
     }
-    fun getDataFromDao(context: Context) = viewModelScope.launch (Dispatchers.Main) {
-        _characters.postValue(repository.getAllCharactersDao())
-        println(repository.getAllCharactersDao())
-        Toast.makeText(context,"From Room",Toast.LENGTH_LONG).show()
-        charactersLoading.value = false
+    fun getDataFromDao() = viewModelScope.launch(Dispatchers.IO) {
+            val charList = repository.getAllCharactersDao()
+            charactersLoading.postValue(false)
+            if(charList.isEmpty()) {
+                charactersError.postValue(true)
+            }else {
+                _characters.postValue(charList)
+                println("VERİLER ROOMDAN GELDİ")
+            }
     }
 }

@@ -12,6 +12,8 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
+        android:refreshing="@{viewModel.charactersLoading}"
+        android:onRefreshListener="@{() -> viewModel.getDataFromApi(context)}"
         android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
