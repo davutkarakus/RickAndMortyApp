@@ -1,6 +1,4 @@
 # RickAndMortyApp
-Rick And Morty with Kotlin
-
 RickAndMorty Android app MVVM Clean architecture.
 
 - MVVM Clean architecture kullanılmıştır. ViewModel kısmında ise flow tercih edilmiştir.
