@@ -16,3 +16,4 @@ RickAndMorty Android app MVVM Clean architecture.
 - ViewBinding
 - DataBinding
 - Room
+- LiveData
