@@ -34,7 +34,7 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
             getDataFromDao()
         }
     }
-     fun getDataFromApi(context: Context) = viewModelScope.launch(Dispatchers.IO){
+     fun getDataFromApi(context: Context) = viewModelScope.launch(Dispatchers.IO ){
          charactersLoading.postValue(true)
          charactersError.postValue(false)
          if(isWifiEnabled(context)){
