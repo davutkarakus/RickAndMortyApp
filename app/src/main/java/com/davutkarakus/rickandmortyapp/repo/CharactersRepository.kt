@@ -12,4 +12,7 @@ class CharactersRepository @Inject constructor(private val api:CharactersApi,pri
     suspend fun getAllCharactersDao() = dao.getAllCharacters()
     suspend fun deleteAllCharactersDao() = dao.deleteAllCharacters()
     suspend fun insertCharactersDao(vararg characters:Result) = dao.insertAll(*characters)
+
+    //Detay sayfası da roomdan çekilmek istenirse.Aşağıdaki suspend fonskiyon kullanılabilir.
+    suspend fun getCharacterFromRoom(charId:Int) = dao.getCharacter(charId)
 }

@@ -9,6 +9,7 @@ import com.davutkarakus.rickandmortyapp.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
 import com.davutkarakus.rickandmortyapp.util.isWifiEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,18 +28,25 @@ class DetailViewModel @Inject constructor(private val repo:CharactersRepository)
             charError.value = true
         }
     }
-
-    private fun getCharacter(id: Int) = viewModelScope.launch {
-        charLoading.value = true
+    private fun getCharacter(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+        charLoading.postValue(true)
         repo.getCharacter(id).let { response ->
             if(response.isSuccessful){
                 _char.postValue(response.body())
-                charLoading.value = false
+                charLoading.postValue(false)
             }else {
-                charLoading.value = false
-                charError.value = true
+                charLoading.postValue(false)
+                charError.postValue(true)
                 Log.i("DetailViewModel","Error!")
             }
         }
     }
+    //Detay sayfası apiden değil de roomdan çekilmek istenirse.Aşağıdaki fonksiyon kullanılabilir.
+
+    /*private fun getCharacterFromRoom(id:Int) = viewModelScope.launch(Dispatchers.IO) {
+        val char = repo.getCharacterFromRoom(id)
+        _char.postValue(char)
+        charLoading.postValue(false)
+    }
+     */
 }

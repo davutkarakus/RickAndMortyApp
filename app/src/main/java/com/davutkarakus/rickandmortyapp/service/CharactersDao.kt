@@ -13,4 +13,8 @@ interface CharactersDao {
     suspend fun getAllCharacters() : List<Result>
     @Query("DELETE FROM results")
     suspend fun deleteAllCharacters()
+
+    //Detay sayfası da roomdan çekilmek istenirse.Aşağıdaki suspend fonskiyon kullanılabilir.
+    @Query("SELECT * FROM results WHERE id = :charId")
+    suspend fun getCharacter(charId:Int) : Result
 }

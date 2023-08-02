@@ -34,9 +34,9 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
             getDataFromDao()
         }
     }
-     fun getDataFromApi(context: Context) = viewModelScope.launch{
-         charactersLoading.value = true
-         charactersError.value = false
+     fun getDataFromApi(context: Context) = viewModelScope.launch(Dispatchers.IO){
+         charactersLoading.postValue(true)
+         charactersError.postValue(false)
          if(isWifiEnabled(context)){
              repository.getAllCharacters().let {response->
                  if(response.isSuccessful){
@@ -46,24 +46,24 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
                          insertAllCharacters(it)
                      }
                      println("VERİLER APİDEN GELDİ")
-                     charactersLoading.value = false
+                     charactersLoading.postValue(false)
                  }else{
-                     charactersLoading.value = false
-                     charactersError.value = true
+                     charactersLoading.postValue(false)
+                     charactersError.postValue(true)
                      Log.i("FeedViewModel","Error!")
                  }
              }
          }else {
              delay(1000)
-             charactersLoading.value = false
-             charactersError.value = true
+             charactersLoading.postValue(false)
+             charactersError.postValue(true)
              Log.i("FeedViewModel","Internet Connection Problem!")
          }
     }
-    fun insertAllCharacters(list:List<Result>) = viewModelScope.launch {
+    fun insertAllCharacters(list:List<Result>) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertCharactersDao(*list.toTypedArray())
     }
-    fun deleteAllCharacters() = viewModelScope.launch {
+    fun deleteAllCharacters() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAllCharactersDao()
     }
     fun getDataFromDao() = viewModelScope.launch(Dispatchers.IO) {
