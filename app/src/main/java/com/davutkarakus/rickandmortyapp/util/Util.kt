@@ -47,7 +47,6 @@ fun stringAppend(t:TextView,episodes: List<String>?) {
             }
         }
     }
-
 }
 
 fun isWifiEnabled(context: Context): Boolean {

@@ -30,9 +30,9 @@ class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val li
         characterList.addAll(newCharacterList)
     }
     override fun onCharacterClicked(v: View) {
-        listener.onItemClickListenerMovies(v)
+        listener.onItemClickListenerCharacters(v)
     }
     interface OnItemClickListener {
-        fun onItemClickListenerMovies(v:View)
+        fun onItemClickListenerCharacters(v:View)
     }
 }

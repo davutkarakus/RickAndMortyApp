@@ -52,7 +52,7 @@ import javax.inject.Inject
         })
         }
 
-    override fun onItemClickListenerMovies(v:View) {
+    override fun onItemClickListenerCharacters(v:View) {
         val binding = v.tag as? RecyclerRowBinding ?: return
         val uuid = binding.character?.id ?: return
         val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment(uuid)
