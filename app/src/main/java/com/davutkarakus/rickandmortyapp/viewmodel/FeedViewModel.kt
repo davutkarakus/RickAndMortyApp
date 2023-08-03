@@ -60,13 +60,13 @@ class FeedViewModel @Inject constructor(private val repository: CharactersReposi
              Log.i("FeedViewModel","Internet Connection Problem!")
          }
     }
-    fun insertAllCharacters(list:List<Result>) = viewModelScope.launch(Dispatchers.IO) {
+    private fun insertAllCharacters(list:List<Result>) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertCharactersDao(*list.toTypedArray())
     }
-    fun deleteAllCharacters() = viewModelScope.launch(Dispatchers.IO) {
+    private fun deleteAllCharacters() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAllCharactersDao()
     }
-    fun getDataFromDao() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getDataFromDao() = viewModelScope.launch(Dispatchers.IO) {
             val charList = repository.getAllCharactersDao()
             charactersLoading.postValue(false)
             if(charList.isEmpty()) {

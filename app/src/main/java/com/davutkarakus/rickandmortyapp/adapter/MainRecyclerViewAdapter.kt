@@ -9,7 +9,7 @@ import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
 import com.davutkarakus.rickandmortyapp.model.Result
 
-class MainRecyclerViewAdapter(var characterList:ArrayList<Result>,private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
+class MainRecyclerViewAdapter(private var characterList:ArrayList<Result>, private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
     class RvHolder(var view:RecyclerRowBinding) : RecyclerView.ViewHolder(view.root) {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
