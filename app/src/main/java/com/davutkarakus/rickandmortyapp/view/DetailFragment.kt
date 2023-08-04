@@ -37,7 +37,7 @@ class DetailFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         getData()

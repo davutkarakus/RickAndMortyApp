@@ -44,9 +44,9 @@ import javax.inject.Inject
         binding.characterList.adapter = mainRecyclerViewAdapter
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        getData()
+        observeData()
     }
-    private fun getData() {
+    private fun observeData() {
         viewModel.characters.observe(viewLifecycleOwner,Observer{
             mainRecyclerViewAdapter.updateCharacterList(it)
         })
