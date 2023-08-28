@@ -1,4 +1,4 @@
-package com.davutkarakus.rickandmortyapp.model
+package com.davutkarakus.network.model
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

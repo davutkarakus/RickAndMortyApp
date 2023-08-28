@@ -5,7 +5,7 @@
     <data>
         <variable
             name="character"
-            type="com.davutkarakus.rickandmortyapp.model.Result" />
+            type="com.davutkarakus.network.model.Result" />
         <variable
             name="listener"
             type="com.davutkarakus.rickandmortyapp.adapter.CharacterClickListener" />

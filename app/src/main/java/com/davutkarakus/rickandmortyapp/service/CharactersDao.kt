@@ -3,7 +3,7 @@ package com.davutkarakus.rickandmortyapp.service
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.davutkarakus.rickandmortyapp.model.Result
+import com.davutkarakus.network.model.Result
 
 @Dao
 interface CharactersDao {

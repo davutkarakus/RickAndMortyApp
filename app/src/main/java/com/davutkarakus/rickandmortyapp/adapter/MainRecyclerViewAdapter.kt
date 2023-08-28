@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.davutkarakus.network.model.Result
 import com.davutkarakus.rickandmortyapp.R
 import com.davutkarakus.rickandmortyapp.databinding.RecyclerRowBinding
-import com.davutkarakus.rickandmortyapp.model.Result
 
 class MainRecyclerViewAdapter(private var characterList:ArrayList<Result>, private val listener:OnItemClickListener) :  RecyclerView.Adapter<MainRecyclerViewAdapter.RvHolder>(),CharacterClickListener{
     class RvHolder(var view:RecyclerRowBinding) : RecyclerView.ViewHolder(view.root) {

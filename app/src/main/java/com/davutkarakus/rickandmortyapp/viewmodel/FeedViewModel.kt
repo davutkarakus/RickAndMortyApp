@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.davutkarakus.rickandmortyapp.model.Result
+import com.davutkarakus.network.model.Result
 import com.davutkarakus.rickandmortyapp.repo.CharactersRepository
 import com.davutkarakus.rickandmortyapp.util.isWifiEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel

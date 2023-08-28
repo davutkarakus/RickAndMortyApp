@@ -1,4 +1,4 @@
-package com.davutkarakus.rickandmortyapp.model
+package com.davutkarakus.network.model
 
 import com.google.gson.annotations.SerializedName
 data class Info(
