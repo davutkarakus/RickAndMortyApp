@@ -1,4 +1,4 @@
-package com.davutkarakus.network.view
+package com.davutkarakus.network
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
